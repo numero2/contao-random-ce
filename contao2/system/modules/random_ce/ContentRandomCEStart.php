@@ -32,7 +32,7 @@ class ContentRandomCEStart extends ContentElement
 			
 			if( $closingElement->id ) {
 
-				$contentElements = Database::getInstance()->prepare("SELECT id FROM tl_content WHERE pid = ? AND sorting > ? AND sorting < ? AND invisible != 1")->execute( $this->pid, $this->sorting, $closingElement->sorting );
+				$contentElements = Database::getInstance()->prepare("SELECT id FROM tl_content WHERE pid = ? AND sorting > ? AND sorting < ? AND invisible != 1 AND ptable = 'tl_article'")->execute( $this->pid, $this->sorting, $closingElement->sorting );
 
 				$aElementIDs = $contentElements->fetchAllAssoc();
 				$GLOBALS['random_ce_hide'] = array();

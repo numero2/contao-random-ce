@@ -40,7 +40,7 @@ class ContentElementListener {
 
 
     /**
-     * Check if this content element should be visible this time
+     * Check if this content element should be visible on this request
      *
      * @param Contao\ContentModel $row
      * @param string $strBuffer

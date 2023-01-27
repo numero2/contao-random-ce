@@ -9,6 +9,7 @@
  * @copyright Copyright (c) 2023, numero2 - Agentur für digitales Marketing GbR
  */
 
+ 
 namespace numero2\RandomCEBundle\Controller\ContentElement;
 
 use Contao\ContentModel;

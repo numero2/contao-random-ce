@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<xliff version="1.1">
+<file datatype="php" original="src/Resources/contao/languages/de/default.php" source-language="en" target-language="de">
+    <body>
+        <!-- CONTENT ELEMENTS -->
+        <trans-unit id="CTE.random_ce">
+            <source>Random Content Element</source>
+            <target>Zufälliges Inhaltselement</target>
+        </trans-unit>
+        <trans-unit id="CTE.randomCEStart.0">
+            <source>Wrapper start</source>
+            <target>Umschlag Anfang</target>
+        </trans-unit>
+        <trans-unit id="CTE.randomCEStart.1">
+            <source>Generates the opening part of the random element wrapper.</source>
+            <target>Erzeugt den öffnenden Teil des zufälligen Inhaltsemenet-Umschlags.</target>
+        </trans-unit>
+        <trans-unit id="CTE.randomCEStop.0">
+            <source>Wrapper stop</source>
+            <target>Umschlag Ende</target>
+        </trans-unit>
+        <trans-unit id="CTE.randomCEStop.1">
+            <source>Generates the closing part of the random element wrapper.</source>
+            <target>Erzeugt den schließenden Teil des zufälligen Inhaltsemenet-Umschlags.</target>
+        </trans-unit>
+    </body>
+</file>
+</xliff>

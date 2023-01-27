@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    numero2\RandomCEBundle\Controller\ContentElement\RandomCEStartController:
+        arguments:
+            - '@database_connection'
+
+    numero2\RandomCEBundle\Controller\ContentElement\RandomCEStopController:

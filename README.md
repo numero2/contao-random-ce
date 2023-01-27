@@ -1,26 +1,19 @@
-contao-random-ce
+Random CE Bundle
 ======================
 
+[![](https://img.shields.io/packagist/v/numero2/contao-random-ce.svg?style=flat-square)](https://packagist.org/packages/numero2/contao-random-ce) [![](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](http://www.gnu.org/licenses/lgpl-3.0)
+
 About
------
+--
 
 Provides a wrapper (like accordion) for content elements to show a different, random element on each reload of the page.
 
+System requirements
+--
 
-Screenshot
------------
+* [Contao 4.13](https://github.com/contao/contao)
 
-![Multiple image elements in a random-wrapper](https://contao.org/files/repository/random_ce/10000009/picture.jpg)
+Installation
+--
 
-
-Dependencies
--------------------
-
-* [Contao](https://github.com/contao/core) 3.0 or higher
-* [Contao](https://github.com/contao/core) 2.0 or higher (Contao 2 Version can be found in the "contao2" folder)
-
-
-Contao Extension-Repository
----------------
-
-[https://contao.org/de/extension-list/view/random_ce.html](https://contao.org/de/extension-list/view/random_ce.html)
+* Install via Contao Manager or Composer (`composer require numero2/contao-random-ce`)

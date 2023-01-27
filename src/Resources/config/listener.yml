@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+
+    numero2_randome_ce.listener.hook.content_element:
+        class: numero2\RandomCEBundle\EventListener\Hook\ContentElementListener
+        arguments:
+            - '@request_stack'
+            - '@contao.routing.scope_matcher'

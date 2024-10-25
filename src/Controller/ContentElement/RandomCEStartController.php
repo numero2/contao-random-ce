@@ -6,15 +6,15 @@
  * @author    Benny Born <benny.born@numero2.de>
  * @author    Michael Bösherz <michael.boesherz@numero2.de>
  * @license   Commercial
- * @copyright Copyright (c) 2023, numero2 - Agentur für digitales Marketing GbR
+ * @copyright Copyright (c) 2024, numero2 - Agentur für digitales Marketing GbR
  */
 
- 
+
 namespace numero2\RandomCEBundle\Controller\ContentElement;
 
 use Contao\ContentModel;
 use Contao\CoreBundle\ServiceAnnotation\ContentElement;
-use Contao\Template;
+use Contao\CoreBundle\Twig\FragmentTemplate;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,7 +43,7 @@ class RandomCEStartController extends InvisibleWrapperController {
     /**
      * {@inheritdoc}
      */
-    protected function getResponse( Template $template, ContentModel $model, Request $request ): ?Response {
+    protected function getResponse( FragmentTemplate $template, ContentModel $model, Request $request ): Response {
 
         // determine which element should be shown this time
         $closingElement = [];
@@ -75,7 +75,7 @@ class RandomCEStartController extends InvisibleWrapperController {
             unset($aElementIDs[$toBeShown]);
 
             // save in master request
-            $masterRequest = $this->container->get('request_stack')->getMasterRequest();
+            $masterRequest = $this->container->get('request_stack')->getMainRequest();
             $masterRequest->attributes->set('randomCEHide', array_values($aElementIDs));
         }
 

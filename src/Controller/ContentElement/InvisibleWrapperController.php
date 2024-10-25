@@ -6,7 +6,7 @@
  * @author    Benny Born <benny.born@numero2.de>
  * @author    Michael Bösherz <michael.boesherz@numero2.de>
  * @license   Commercial
- * @copyright Copyright (c) 2023, numero2 - Agentur für digitales Marketing GbR
+ * @copyright Copyright (c) 2024, numero2 - Agentur für digitales Marketing GbR
  */
 
 
@@ -15,7 +15,7 @@ namespace numero2\RandomCEBundle\Controller\ContentElement;
 use Contao\BackendTemplate;
 use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
-use Contao\Template;
+use Contao\CoreBundle\Twig\FragmentTemplate;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -24,7 +24,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class InvisibleWrapperController extends AbstractContentElementController {
 
 
-    public function __invoke( Request $request, ContentModel $model, string $section, array $classes = null ): Response {
+    public function __invoke( Request $request, ContentModel $model, string $section, array|null $classes = null ): Response {
 
         if( $this->container->get('contao.routing.scope_matcher')->isBackendRequest($request) ) {
             return $this->getBackendWildcard($model);
@@ -64,7 +64,7 @@ class InvisibleWrapperController extends AbstractContentElementController {
     /**
      * {@inheritdoc}
      */
-    protected function getResponse( Template $template, ContentModel $model, Request $request ): ?Response {
+    protected function getResponse( FragmentTemplate $template, ContentModel $model, Request $request ): Response {
 
         return new Response('');
     }

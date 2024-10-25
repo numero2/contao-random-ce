@@ -11,7 +11,7 @@ Provides a wrapper (like accordion) for content elements to show a different, ra
 System requirements
 --
 
-* [Contao 4.13](https://github.com/contao/contao)
+* [Contao 5.0](https://github.com/contao/contao) or newer
 
 Installation
 --

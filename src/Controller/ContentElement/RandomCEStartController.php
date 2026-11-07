@@ -45,40 +45,32 @@ class RandomCEStartController extends InvisibleWrapperController {
      */
     protected function getResponse( FragmentTemplate $template, ContentModel $model, Request $request ): Response {
 
-        // determine which element should be shown this time
-        $closingElement = [];
+		// determine which element should be shown this time
+		$closingElement = $this->connection->fetchAssociative(
+			"SELECT id, sorting FROM tl_content WHERE pid=:pid AND ptable=:ptable AND sorting>:sorting AND type=:type ORDER BY sorting ASC LIMIT 1",
+			['pid'=>$model->pid, 'ptable'=>'tl_article', 'sorting'=>$model->sorting, 'type'=>'randomCEStop']
+		);
 
-        $res = $this->connection
-            ->prepare("SELECT id, sorting FROM tl_content WHERE pid=:pid AND ptable=:ptable AND sorting>:sorting AND type=:type ORDER BY sorting ASC LIMIT 1")
-            ->execute(['pid'=>$model->pid, 'ptable'=>'tl_article', 'sorting'=>$model->sorting, 'type'=>'randomCEStop']);
+		if( $closingElement && !empty($closingElement['id']) ) {
 
-        if( $res && $res->rowCount() ) {
-            $closingElement = $res->fetch();
-        }
+			$aElementIDs = $this->connection->fetchFirstColumn(
+				"SELECT id FROM tl_content WHERE pid=:pid AND ptable=:ptable AND sorting>:sortingStart AND sorting<:sortingEnd AND invisible!=:invisible ORDER BY sorting ASC",
+				['pid'=> $model->pid, 'ptable'=> 'tl_article', 'sortingStart'=> $model->sorting, 'sortingEnd'=> $closingElement['sorting'], 'invisible'=> 1]
+			);
 
-        if( $closingElement && !empty($closingElement['id']) ) {
+			if( !empty($aElementIDs) ) {
 
-            $aElementIDs = [];
+				// decide which will be shown
+				$toBeShown = mt_rand(0, (count($aElementIDs)-1));
+				unset($aElementIDs[$toBeShown]);
 
-            $res = $this->connection
-                ->prepare("SELECT id FROM tl_content WHERE pid=:pid AND ptable=:ptable AND sorting>:sortingStart AND sorting<:sortingEnd AND invisible!=:invisible ORDER BY sorting ASC")
-                ->execute(['pid'=> $model->pid, 'ptable'=> 'tl_article', 'sortingStart'=> $model->sorting, 'sortingEnd'=> $closingElement['sorting'], 'invisible'=> 1]);
+				// save in master request
+				$masterRequest = $this->container->get('request_stack')->getMainRequest();
+				$masterRequest->attributes->set('randomCEHide', array_values($aElementIDs));
+			}
+		}
 
-            if( $res && $res->rowCount() ) {
-                foreach( $res->fetchAll() as $row ) {
-                    $aElementIDs[] = $row['id'];
-                }
-            }
+		return parent::getResponse($template, $model, $request);
+	}
 
-            // decide which will be shown
-            $toBeShown = mt_rand(0, (count($aElementIDs)-1));
-            unset($aElementIDs[$toBeShown]);
-
-            // save in master request
-            $masterRequest = $this->container->get('request_stack')->getMainRequest();
-            $masterRequest->attributes->set('randomCEHide', array_values($aElementIDs));
-        }
-
-        return parent::getResponse($template, $model, $request);
-    }
 }
